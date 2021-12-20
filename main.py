@@ -47,14 +47,13 @@ def submit_location(client):
     height = client.execute_script(
         "return document.documentElement.scrollHeight")
     client.set_window_size(width, height)
-    while True:
-        element = WebDriverWait(client, 10).until(
-            EC.presence_of_element_located((By.TAG_NAME, "update-location")))  # added
-        element.click()  # added
-        print(datetime.now(), '更新位置')
-        time.sleep(600)
-        # 截图并关掉浏览器
-        client.save_screenshot("sc.png")
+    element = WebDriverWait(client, 10).until(
+        EC.presence_of_element_located((By.TAG_NAME, "update-location")))  # added
+    element.click()  # added
+    print(datetime.now(), '更新位置')
+    time.sleep(3)
+    # 截图并关掉浏览器
+    client.save_screenshot("sc.png")
     client.quit()
 
 
