@@ -16,7 +16,6 @@ chrome_options.add_experimental_option('prefs', {
     "profile.default_content_settings.popups": 1
 })
 chrome_options.add_argument('--headless')
-chrome_options.add_argument("window-size=1920x1080")
 chrome_options.add_argument(
     "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
 chrome_options.add_argument('--disable-gpu')
@@ -48,9 +47,11 @@ def submit_location(client):
     height = client.execute_script(
         "return document.documentElement.scrollHeight")
     client.set_window_size(width, height)
-    element = WebDriverWait(client, 20).until(
-        EC.presence_of_element_located((By.TAG_NAME, "update-location")))  # added
-    element.click()  # added
+    # element = WebDriverWait(client, 20).until(
+    #     EC.presence_of_element_located((By.TAG_NAME, "update-location")))  # added
+    # element.click()  # added
+    time.sleep(3)
+    client.find_element(By.TAG_NAME, 'update-location').click()
     print(datetime.now(), '更新位置')
     time.sleep(3)
     # 截图并关掉浏览器
